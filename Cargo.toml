@@ -1,0 +1,19 @@
+[package]
+name = "bevy_chess"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bevy = "0.16.1"
+bevy_egui = "0.36.0"
+regex = "1.11.1"
+
+[profile.release]
+lto = true        # 链接时优化
+codegen-units = 1 # 减少代码生成单元以提高优化
+panic = "abort"   # 将 panic 转换为中止，减少二进制大小
+opt-level = 3     # 最高优化级别
+
+# 对于特定架构的优化
+[target.'cfg(target_arch = "x86_64")'.profile.release]
+codegen-units = 16
